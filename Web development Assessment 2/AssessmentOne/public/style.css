@@ -1,0 +1,17 @@
+.subsection {
+    margin-right: 400px;
+    margin-left: 400px;
+}
+
+.subsection-text {
+    margin-right: 250px;
+    margin-left: 250px;
+    text-align: center;
+}
+
+.subheading {
+    text-align: center;
+    background-color: lightblue;
+    padding: 30px;
+    border-radius: 20px;
+}

@@ -1,0 +1,33 @@
+body {
+    margin: 0px;
+    background-color: beige;
+}
+
+#body {
+    margin: 20px;
+    background-color: white;
+    padding: 50px;
+    box-shadow: 8px 8px 8px;
+}
+
+header {
+    text-align: center;
+    background-color: lightblue;
+    padding: 30px;
+}
+
+#navbar {
+    display: flex;
+    justify-content: center;
+}
+
+.ul {
+    border: 1px solid #555555;
+    padding: 20px;
+    background-color: aliceblue;
+}
+
+.navtext {
+    text-decoration: none;
+    padding: 10px;
+}
