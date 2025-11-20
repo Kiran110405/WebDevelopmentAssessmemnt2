@@ -1,4 +1,4 @@
-let notes = [];
+let notes = []; //array for the notes
 
 function loadNotes() {
   const savedNotes = localStorage.getItem("quickNotes"); //retrieves the saved notes from local storage
@@ -7,14 +7,14 @@ function loadNotes() {
 
 function saveNote(event) {
   event.preventDefault(); //doesnt cause a refresh and loose the data in the modal/dialog so will still be there
-  const title = document.getElementById("noteTitle").value.trim();
+  const title = document.getElementById("noteTitle").value.trim(); //gets value written in this ID and saves it
   const content = document.getElementById("noteContent").value.trim(); //trim to get rid of white space
 
   notes.unshift({
-    //unshift adds elements to the beggining of the array
+    //unshift adds new notes to the beggining of the array
     id: generateId(),
     title: title, //the title variable
-    content: content, //content variable
+    content: content, //the content variable
   });
 
   saveNotes();
@@ -28,23 +28,12 @@ function generateId() {
 function saveNotes() {
   console.log("quickNotes", JSON.stringify(notes)); //turns the notes array into a readable string
   localStorage.setItem("quickNotes", JSON.stringify(notes)); //turns the notes array into a readable string
-}
+} //calls the saved not function to the local storage and stringifies them with JSON
 
 //Displays the notes written onto the screen
 
 function renderNotes() {
   const notesContainer = document.getElementById("notesContainer");
-
-  if (notes.length === 0) {
-    notesContainer.innerHTML = `
-    <div class="empty-state">
-    <h2>No Notes Yet</h2>
-    <p>Create your first note!</p>
-    <button class="add-note-button" onclick="openNoteDialog()">+ Add your first note</button>
-    </div>
-    `;
-    return;
-  }
   notesContainer.innerHTML = notes
     .map(
       (note) => `
@@ -53,7 +42,7 @@ function renderNotes() {
     <p class="note-content">${note.content}</p>
     </div>
     `
-    ) //creates a div, subheading and text for each note
+    ) //creates a div, subheading and text for each note to display then
     .join("");
 } //notes.map allows execution for very note in the array
 
@@ -63,20 +52,19 @@ function openNoteDialog() {
   const titleInput = document.getElementById("noteTitle");
   const contentInput = document.getElementById("noteContent");
 
-  dialog.showModal(); //will open up dialog element(cont dialog)
-  titleInput.focus(); //curser automatically jumps to title section
+  dialog.showModal(); //will open up dialog element(const dialog)
 }
 
 function closeNoteDialog() {
-  //closes modal and the following Ids
   document.getElementById("noteDialog").close();
-}
+} //closes modal and the following Ids
 
 document.addEventListener("DOMContentLoaded", function () {
-  notes = loadNotes();
-  renderNotes();
+  //waits until HTML page is fully loaded
+  notes = loadNotes(); //calls loadNotes function to grab from local storage
+  renderNotes(); //displaying the notes
 
-  document.getElementById("noteForm").addEventListener("submit", saveNote); //when the note is 'submitted the note is now saved
+  document.getElementById("noteForm").addEventListener("submit", saveNote); //when the note is 'submitted the note is now saved as"saveNote" is the function to save it
 
   document
     .getElementById("noteDialog")
