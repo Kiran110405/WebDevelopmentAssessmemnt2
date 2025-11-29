@@ -21,20 +21,6 @@ app.get("/map", (request, response) => {
   response.sendFile(path.join(__dirname, "/public", "map.html"));
 });
 
-app.get("/login", (request, response) => {
-  response.sendFile(path.join(__dirname, "/public", "login.html"));
-});
-
-app.post("/login", (req, res) => {
-  const { username, password } = req.body;
-
-  if (users.checkUser(username, password)) {
-    return res.sendFile(path.join(__dirname, "/views", "notes.html"));
-  }
-
-  return res.sendFile(path.join(__dirname, "/views", "login_failed.html"));
-});
-
 app.get("/register", (request, response) => {
   response.sendFile(path.join(__dirname, "/public", "register.html"));
 });
@@ -46,6 +32,19 @@ app.post("/register", (request, response) => {
   response.sendFile(
     path.join(__dirname, "/public", "registration_failed.html")
   );
+});
+
+app.get("/login", (request, response) => {
+  response.sendFile(path.join(__dirname, "/public", "login.html"));
+});
+
+app.post("/login", (request, response) => {
+  if (users.checkUser(request.body.username, request.body.password)) {
+    response.sendFile(path.join(__dirname, "/public", "notes.html"));
+  } else {
+    console.log("invalid user");
+    response.sendFile(path.join(__dirname, "/public", "login_failed.html"));
+  }
 });
 
 app.get("/notes", (request, response) => {
