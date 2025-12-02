@@ -9,31 +9,21 @@ const userSchema = new Schema({
 
 const userData = model("user", userSchema);
 
-async function addUser(usernameFromForm, password) {
-  let found = null;
-  found = await userData.findOne({ username: usernameFromForm }).exec();
-  if (found) {
-    return false;
-  } else {
-    let newUser = {
-      username: usernameFromForm,
-      password: password,
-    };
-    await userData.create(newUser);
-    return true;
-  }
+// Add a user
+async function addUser(username, password) {
+  const found = await userData.findOne({ username }).exec();
+  if (found) return false;
+
+  await userData.create({ username, password });
+  return true;
 }
 
-function checkUser(username, password) {
-  let foundUser = findUser(username);
-  if (foundUser) {
-    return foundUser.password == password;
-  }
-  return false;
-}
+// Check login using MongoDB
+async function checkUser(username, password) {
+  const foundUser = await userData.findOne({ username }).exec();
+  if (!foundUser) return false;
 
-function findUser(username) {
-  return users.find((thisUser) => thisUser.username == username);
+  return foundUser.password === password;
 }
 
 module.exports = {
