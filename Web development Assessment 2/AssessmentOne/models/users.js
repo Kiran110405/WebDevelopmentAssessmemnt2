@@ -1,22 +1,27 @@
-let users = [
-  { username: "user1", password: "123" },
-  { username: "user2", password: "456" },
-];
+const mongoose = require("mongoose");
 
-function addUser(username, password) {
-  let existingUser = findUser(username);
-  console.log(existingUser);
-  if (!existingUser) {
+const { Schema, model } = mongoose;
+
+const userSchema = new Schema({
+  username: String,
+  password: String,
+});
+
+const userData = model("user", userSchema);
+
+async function addUser(usernameFromForm, password) {
+  let found = null;
+  found = await userData.findOne({ username: usernameFromForm }).exec();
+  if (found) {
+    return false;
+  } else {
     let newUser = {
-      username: username,
+      username: usernameFromForm,
       password: password,
     };
-
-    users.push(newUser);
+    await userData.create(newUser);
     return true;
   }
-
-  return false; // user already exists
 }
 
 function checkUser(username, password) {
@@ -34,6 +39,4 @@ function findUser(username) {
 module.exports = {
   addUser,
   checkUser,
-  findUser,
-  users,
 };

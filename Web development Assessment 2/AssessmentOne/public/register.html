@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="EveryPage.css">
+    <link rel="stylesheet" href="register.css">
 </head>
 
 <body>
@@ -23,12 +24,12 @@
 
     </nav>
     <main div="body">
-        <form action="/register" method="POST">
+        <form id="form" action="/register" method="POST">
             <label>Username</label>
-            <input type="text" id="username" name="username"><br>
+            <input id="usernameInput" type="text" id="username" name="username"><br>
             <label>Password</label>
-            <input type="text" id="password" name="password"><br>
-            <input type="submit" value="Register">
+            <input id="passwordInput" type="text" id="password" name="password"><br>
+            <input id="submit" type="submit" value="Register">
         </form>
     </main>
 </body>
