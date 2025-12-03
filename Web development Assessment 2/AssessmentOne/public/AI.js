@@ -45,15 +45,14 @@ function appendMessage(sender, message) {
 }
 
 async function getBotResponse(userMessage) {
-  const apiKey =
-    "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";
+  const apiKey =''
   const apiUrl = "https://api.openai.com/v1/chat/completions";
 
   try{
     const response = await fetch(apiUrl,{
         method:"POST",
         headers:{
-            
+
         }
     })
   }
